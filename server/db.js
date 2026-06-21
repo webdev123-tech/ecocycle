@@ -107,8 +107,11 @@ function seed() {
   const t = now(), day = 86400000;
   const hash = (pw) => bcrypt.hashSync(pw, 10);
 
+  // NOTE: positional ? params (not @named). libsql's better-sqlite3 compat layer
+  // does not bind @name object params — they silently insert NULL — so this seed
+  // (and the whole app) uses positional placeholders, like every other table here.
   const insUser = db.prepare(`INSERT INTO users (id,name,email,phone,password_hash,role,address,lat,lng,avatar,points,level,level_name,streak,truck,rating,email_verified,phone_verified,provider,created_at)
-    VALUES (@id,@name,@email,@phone,@password_hash,@role,@address,@lat,@lng,@avatar,@points,@level,@level_name,@streak,@truck,@rating,@email_verified,@phone_verified,@provider,@created_at)`);
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
   const users = [
     { id:'u_amina', name:'Amina Nakato', email:'amina.n@gmail.com', phone:'+256772113044', role:'citizen', address:'Plot 14, Bukoto Street, Kampala', lat:0.3392, lng:32.5980, avatar:'AN', points:1840, level:4, level_name:'Eco Champion', streak:12, truck:null, rating:null },
     { id:'u_collector', name:'Joseph Okello', email:'j.okello@ecocycle.ug', phone:'+256701998220', role:'collector', address:'KCCA Depot, Lugogo', lat:0.3340, lng:32.6010, avatar:'JO', points:0, level:1, level_name:'Collector', streak:0, truck:'UAX 442K', rating:4.8 },
@@ -117,7 +120,10 @@ function seed() {
     { id:'u_grace', name:'Grace Atim', email:'grace.a@gmail.com', phone:'+256772300222', role:'citizen', address:'Ntinda', lat:0.3512, lng:32.6101, avatar:'GA', points:2410, level:5, level_name:'Eco Star', streak:15, truck:null, rating:null },
     { id:'u_brian', name:'Brian Mukasa', email:'brian.m@gmail.com', phone:'+256772300333', role:'citizen', address:'Kawempe', lat:0.3680, lng:32.5640, avatar:'BM', points:1620, level:4, level_name:'Eco Champion', streak:7, truck:null, rating:null },
   ];
-  users.forEach(u => insUser.run({ password_hash:hash('ecocycle'), email_verified:1, phone_verified:1, provider:'local', created_at:t, ...u, truck:u.truck??null, rating:u.rating??null }));
+  users.forEach(u => insUser.run(
+    u.id, u.name, u.email, u.phone, hash('ecocycle'), u.role, u.address, u.lat, u.lng, u.avatar,
+    u.points, u.level, u.level_name, u.streak, u.truck ?? null, u.rating ?? null, 1, 1, 'local', t
+  ));
 
   const insReport = db.prepare(`INSERT INTO reports (id,user_id,type,urgency,status,description,area,lat,lng,photo_url,assigned_to,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`);
   [
