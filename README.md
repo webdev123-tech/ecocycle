@@ -78,6 +78,32 @@ The app runs today in **sandbox mode** for SMS / email / payments / Google. To m
 Until then: OTP codes show **on-screen**, payments show a **sandbox confirmation**, Google shows a
 "ready when key added" note. The logic is real either way.
 
+### 💾 Persistent accounts in production (Turso — free)
+
+Locally, all data is saved in a SQLite file that persists on disk. On a **free cloud host
+(e.g. Render) the disk is wiped on every restart/redeploy**, so accounts created online would
+vanish. To keep them forever, point the app at a free **Turso** cloud database — no code changes,
+just two environment variables:
+
+```bash
+# one-time, on your computer:
+curl -sSfL https://get.tur.so/install.sh | bash   # install the turso CLI
+turso auth signup                                  # free account (GitHub login)
+turso db create ecocycle
+turso db show ecocycle --url        # -> copy as TURSO_DATABASE_URL  (libsql://...)
+turso db tokens create ecocycle     # -> copy as TURSO_AUTH_TOKEN
+```
+
+Then in **Render → your service → Environment**, add:
+
+| Key | Value |
+|-----|-------|
+| `TURSO_DATABASE_URL` | the `libsql://…` URL from above |
+| `TURSO_AUTH_TOKEN`   | the token from above |
+
+Save → Render redeploys → accounts now survive every restart and are shared across the website
+and the Android app. With both vars **blank**, it transparently falls back to the local file (dev).
+
 ---
 
 ## 🎬 3-minute demo walkthrough

@@ -1,14 +1,43 @@
 /* ===========================================================================
-   EcoCycle — Database (SQLite via better-sqlite3)
+   EcoCycle — Database (libSQL: local SQLite file, or Turso cloud in production)
    Real relational schema + idempotent seed.
    =========================================================================== */
 const path = require('path');
-const Database = require('better-sqlite3');
+const Database = require('libsql');
 const bcrypt = require('bcryptjs');
 
-const db = new Database(path.join(__dirname, 'ecocycle.db'));
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
+/* Persistent cloud database via Turso when TURSO_DATABASE_URL is set (production).
+   Uses a libSQL embedded replica: fast local reads, while writes are forwarded
+   durably to the Turso primary — so accounts and data survive Render restarts and
+   redeploys. With no env vars set it falls back to a plain local SQLite file for
+   offline/local development. libsql is a synchronous, better-sqlite3-compatible
+   driver, so the rest of the server is unchanged. */
+const localPath = path.join(__dirname, 'ecocycle.db');
+const TURSO_URL = process.env.TURSO_DATABASE_URL;
+const TURSO_TOKEN = process.env.TURSO_AUTH_TOKEN;
+let db;
+if (TURSO_URL) {
+  db = new Database(localPath, { syncUrl: TURSO_URL, authToken: TURSO_TOKEN });
+  try { db.sync(); console.log('☁️  Turso connected — replica synced from cloud primary'); }
+  catch (e) { console.warn('⚠️  Turso initial sync failed (continuing; writes still forward to cloud):', e.message); }
+} else {
+  db = new Database(localPath);
+  console.log('💾 Using local SQLite file (TURSO_DATABASE_URL not set)');
+}
+
+/* libsql attaches a `_metadata` field to single-row .get() results; strip it so
+   rows are byte-for-byte what better-sqlite3 returned (and it never leaks into
+   API responses). .all()/.run() are already identical. */
+const _prepare = db.prepare.bind(db);
+db.prepare = (sql) => {
+  const stmt = _prepare(sql);
+  const _get = stmt.get.bind(stmt);
+  stmt.get = (...args) => { const row = _get(...args); if (row && typeof row === 'object') delete row._metadata; return row; };
+  return stmt;
+};
+
+/* WAL only applies to the local file; embedded replicas manage their own journaling. */
+try { if (!TURSO_URL) db.pragma('journal_mode = WAL'); db.pragma('foreign_keys = ON'); } catch (e) {}
 
 db.exec(`
 CREATE TABLE IF NOT EXISTS users (
@@ -154,6 +183,8 @@ function seed() {
 
   console.log('✓ Database seeded with demo data');
 }
-seed();
+// Run seeding in a single transaction: one network round-trip to the Turso
+// primary on first boot instead of dozens (only ever runs once per database).
+db.transaction(seed)();
 
 module.exports = { db, uid, now };

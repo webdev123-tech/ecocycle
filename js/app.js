@@ -136,9 +136,21 @@ async function boot() {
   subscribe(scheduleRender);   // re-render on any store change (points, theme, reports…)
   scheduleRender();            // single initial render (coalesced with the hash-set event)
 
-  // service worker (offline)
+  // service worker (offline + auto-update): when a new worker takes control,
+  // reload once so the user is never stuck on a stale build.
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', ()=> navigator.serviceWorker.register('sw.js').catch(()=>{}));
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return; refreshing = true; location.reload();
+    });
+    window.addEventListener('load', ()=> navigator.serviceWorker.register('sw.js').then(reg => {
+      reg.addEventListener('updatefound', () => {
+        const sw = reg.installing;
+        sw && sw.addEventListener('statechange', () => {
+          if (sw.state === 'installed' && navigator.serviceWorker.controller) sw.postMessage('SKIP_WAITING');
+        });
+      });
+    }).catch(()=>{}));
   }
 }
 boot();

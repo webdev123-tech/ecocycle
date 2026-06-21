@@ -19,6 +19,10 @@ services:
         generateValue: true
       - key: PUBLIC_URL
         sync: false   # set to the live https URL after first deploy
+      # Turso persistent database — set both so accounts survive restarts/redeploys
+      # (free tier resets the local disk; Turso keeps the data in the cloud).
+      - { key: TURSO_DATABASE_URL, sync: false }
+      - { key: TURSO_AUTH_TOKEN,   sync: false }
       # paste real integration keys in the dashboard (kept out of git):
       - { key: AT_USERNAME,     sync: false }
       - { key: AT_API_KEY,      sync: false }
