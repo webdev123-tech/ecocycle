@@ -1,0 +1,19 @@
+# deps
+server/node_modules/
+node_modules/
+
+# secrets & local data
+server/.env
+.env
+
+# runtime db (re-seeds on boot)
+server/ecocycle.db
+server/ecocycle.db-*
+
+# user uploads (keep folder, ignore contents)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# os / editor
+.DS_Store
+*.log

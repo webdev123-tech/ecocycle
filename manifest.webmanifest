@@ -1,0 +1,24 @@
+{
+  "name": "EcoCycle — Smart Waste, Clean Cities",
+  "short_name": "EcoCycle",
+  "description": "A smart waste management ecosystem connecting citizens, collectors and cities for a cleaner, circular future. Aligned with UN SDG 11, 12 & 13.",
+  "id": "/ecocycle/",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1411",
+  "theme_color": "#15803d",
+  "categories": ["utilities", "lifestyle", "productivity"],
+  "lang": "en",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Report Waste", "short_name": "Report", "url": "./index.html#/report" },
+    { "name": "Smart Map", "short_name": "Map", "url": "./index.html#/map" },
+    { "name": "My Impact", "short_name": "Impact", "url": "./index.html#/impact" }
+  ]
+}

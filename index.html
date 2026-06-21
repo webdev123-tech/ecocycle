@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#15803d" />
+  <meta name="description" content="EcoCycle — Smart waste management ecosystem for clean, circular cities. SDG 11 · 12 · 13." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="EcoCycle" />
+  <title>EcoCycle — Smart Waste, Clean Cities</title>
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <link rel="stylesheet" href="vendor/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Optional desktop "phone frame" wrapper -->
+  <div id="device">
+    <div id="app" class="app">
+      <!-- App shell rendered by JS -->
+      <div class="boot">
+        <div class="boot__logo">♻️</div>
+        <div class="boot__name">EcoCycle</div>
+        <div class="boot__spin"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global layers -->
+  <div id="toast" class="toast-host" aria-live="polite"></div>
+  <div id="sheet-host" class="sheet-host" hidden></div>
+
+  <script src="vendor/leaflet.js"></script>
+  <script src="vendor/chart.umd.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
