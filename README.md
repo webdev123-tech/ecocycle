@@ -10,6 +10,10 @@ This is **not a mockup** — it has a real database, real accounts, real JWT aut
 real on-device AI, and real (or sandbox-ready) SMS, email, payments and Google login.
 See **COMPETITIVE.md** for how it out-competes Yo-Waste, Homeklin and T-Bin.
 
+> ### 🌐 Live demo: **https://ecocycle-gsx4.onrender.com**
+> Hosted on Render. The first visit may take ~30s to wake (free tier), then it's fast.
+> Sign in with any demo account below. 📄 A full project report and pitch deck are in [`docs/`](docs/).
+
 ---
 
 ## 🚀 Run it
@@ -28,8 +32,18 @@ http://localhost:4000/
 ```
 
 ### Install on a phone 📲
-On the same Wi-Fi, open **http://<your-PC-IP>:4000/** in Chrome → **menu → Install app**.
-It installs to the home screen, runs full-screen, and works offline (including the AI model).
+Open the **live URL** above (or `http://<your-PC-IP>:4000/` on the same Wi-Fi) in Chrome →
+**menu → Install app**. It installs to the home screen, runs full-screen, and works offline
+(including the AI model).
+
+### Android app (.apk) 🤖
+EcoCycle ships as a real Android package built from the PWA (Trusted Web Activity):
+1. Go to **https://www.pwabuilder.com** and enter the live URL above.
+2. **Package For Stores → Android** → keep package id `ug.ecocycle.app` → **Download**.
+3. Install the generated `.apk` on any Android phone.
+
+The site already serves `/.well-known/assetlinks.json`, so once you paste the package's
+SHA-256 fingerprint into that file the app runs **full-screen with no browser bar**.
 
 ---
 

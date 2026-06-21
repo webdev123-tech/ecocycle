@@ -315,6 +315,11 @@ app.get('/api/payments', auth(), (req, res) =>
   res.json({ payments: db.prepare('SELECT * FROM payments WHERE user_id=? ORDER BY created_at DESC').all(req.user.id) }));
 
 /* ============================ STATIC PWA ============================ */
+// Android TWA verification (express.static ignores dotfiles, so serve it explicitly)
+app.get('/.well-known/assetlinks.json', (req, res) => {
+  res.type('application/json');
+  res.sendFile(path.join(ROOT, '.well-known', 'assetlinks.json'));
+});
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(ROOT, { extensions: ['html'] }));
 app.get('/', (req, res) => res.sendFile(path.join(ROOT, 'index.html')));
