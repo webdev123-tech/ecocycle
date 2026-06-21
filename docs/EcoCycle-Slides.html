@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>EcoCycle — Pitch Deck</title>
+<style>
+  :root{--green:#15803d;--green-d:#0f5c2e;--green-l:#22c55e;--ink:#10211a;--muted:#5b6b62;--soft:#f1f8f4;--line:#d6e6dc;--amber:#f59e0b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#33403a}
+  .slide{position:relative;width:1280px;height:720px;margin:0 auto;background:#fff;overflow:hidden;
+         page-break-after:always;display:flex;flex-direction:column;justify-content:center;padding:70px 86px}
+  .slide.center{align-items:center;text-align:center}
+  .kicker{color:var(--green);font-weight:800;letter-spacing:3px;font-size:18px;text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:60px;line-height:1.05;color:var(--green-d);margin-bottom:18px}
+  h2{font-size:44px;line-height:1.1;color:var(--green-d);margin-bottom:26px}
+  p{font-size:26px;line-height:1.45;color:var(--ink)}
+  .lead{font-size:30px;color:var(--muted);max-width:920px}
+  .num{position:absolute;bottom:34px;right:54px;color:#aebdb4;font-size:16px;font-weight:700}
+  .brand{position:absolute;bottom:34px;left:54px;color:#aebdb4;font-size:16px;font-weight:700;letter-spacing:1px}
+  ul{list-style:none;margin-top:8px}
+  li{font-size:27px;line-height:1.5;padding-left:42px;position:relative;margin:14px 0}
+  li::before{content:"♻";position:absolute;left:0;color:var(--green-l);font-size:26px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:14px}
+  .grid.three{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:26px 28px}
+  .card .ic{font-size:40px}
+  .card h3{font-size:25px;color:var(--green-d);margin:10px 0 6px}
+  .card p{font-size:19px;color:var(--muted);line-height:1.4}
+  .stats{display:flex;gap:26px;margin-top:24px}
+  .stat{flex:1;background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:26px;text-align:center}
+  .stat .n{font-size:54px;font-weight:900;color:var(--green-d);display:block;line-height:1}
+  .stat .l{font-size:18px;color:var(--muted);margin-top:10px;display:block}
+  .badges{display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.5);border-radius:999px;padding:11px 22px;font-size:18px;font-weight:700;color:#fff}
+  table{border-collapse:collapse;width:100%;margin-top:10px;font-size:20px}
+  th,td{border:1px solid var(--line);padding:11px 14px;text-align:left}
+  th{background:var(--green);color:#fff}
+  td.y{color:var(--green-d);font-weight:800;text-align:center}
+  td.n{color:#c0c9c3;text-align:center}
+  tr:nth-child(even) td{background:var(--soft)}
+  .hero{background:linear-gradient(155deg,#0f5c2e 0%,#15803d 55%,#1f9d4d 100%);color:#fff}
+  .hero h1{color:#fff} .hero .kicker{color:#bff0cf}
+  .hero img{width:120px;height:120px;border-radius:28px;margin-bottom:24px;box-shadow:0 14px 40px rgba(0,0,0,.3)}
+  .dark{background:#0d1714;color:#cfeada}
+  .dark h2{color:#fff}
+  .arch{font-family:"Cascadia Code",Consolas,monospace;font-size:17px;line-height:1.5;color:#bdf0d0;white-space:pre}
+  .callout{background:#fff7ed;border-left:7px solid var(--amber);border-radius:0 14px 14px 0;padding:22px 28px;margin-top:18px}
+  .callout p{font-size:25px}
+  .big{font-size:34px;font-weight:800;color:var(--green-d)}
+  @page{size:1280px 720px;margin:0}
+</style>
+</head>
+<body>
+
+<!-- 1 TITLE -->
+<section class="slide center hero">
+  <img src="../icons/icon-512.png" alt="logo">
+  <div class="kicker">EcoCycle</div>
+  <h1>Smart Waste, Clean Cities</h1>
+  <p class="lead" style="color:#eafff1">A real, full-stack digital ecosystem connecting citizens, collectors &amp; city authorities — for a cleaner, circular Kampala.</p>
+  <div class="badges">
+    <span class="badge">SDG 11</span><span class="badge">SDG 12</span><span class="badge">SDG 13</span>
+  </div>
+  <span class="brand">Arnold Kigozi · Kampala, Uganda</span>
+  <span class="num">UN &amp; University · 2026</span>
+</section>
+
+<!-- 2 PROBLEM -->
+<section class="slide">
+  <div class="kicker">The Problem</div>
+  <h2>Kampala is drowning in its own waste</h2>
+  <div class="stats">
+    <div class="stat"><span class="n">2,500t</span><span class="l">waste generated every day</span></div>
+    <div class="stat"><span class="n">~48%</span><span class="l">never collected</span></div>
+    <div class="stat"><span class="n">35+</span><span class="l">killed, Kiteezi collapse 2024</span></div>
+  </div>
+  <div class="callout"><p>On <b>9 August 2024</b>, heavy rain collapsed the overfull Kiteezi landfill — burying homes and killing dozens. It had been past capacity since <b>2012</b>, yet still took 1,500–2,000 tonnes a day.</p></div>
+  <span class="brand">EcoCycle</span><span class="num">2</span>
+</section>
+
+<!-- 3 ROOT CAUSE -->
+<section class="slide center">
+  <div class="kicker">Root Cause</div>
+  <h2>It's a broken information loop</h2>
+  <p class="lead">Citizens can't report dumps. Collectors work blind, with no job lists or proof. Cities have no real-time data. And nobody is rewarded for recycling — so recyclables get buried.</p>
+  <p class="big" style="margin-top:30px">EcoCycle reconnects all three.</p>
+  <span class="brand">EcoCycle</span><span class="num">3</span>
+</section>
+
+<!-- 4 SOLUTION -->
+<section class="slide">
+  <div class="kicker">The Solution</div>
+  <h2>One app, three roles, one loop</h2>
+  <div class="grid three">
+    <div class="card"><div class="ic">👤</div><h3>Citizen</h3><p>Report waste with photo + GPS, get AI sorting, schedule &amp; pay for pickups, earn rewards.</p></div>
+    <div class="card"><div class="ic">🚛</div><h3>Collector</h3><p>Live job queue, navigation, photo proof-of-collection, live truck location.</p></div>
+    <div class="card"><div class="ic">🏙️</div><h3>City / Admin</h3><p>Live map of reports, emergency alerts, and an SDG impact dashboard.</p></div>
+  </div>
+  <span class="brand">EcoCycle</span><span class="num">4</span>
+</section>
+
+<!-- 5 AI -->
+<section class="slide">
+  <div class="kicker">The Intelligence</div>
+  <h2>AI that sorts waste — on your phone</h2>
+  <p class="lead">Snap a photo. TensorFlow.js + MobileNet classify it instantly:</p>
+  <div class="grid three" style="margin-top:24px">
+    <div class="card"><div class="ic">🍌➜🌱</div><h3>Organic</h3><p>banana peel, food waste</p></div>
+    <div class="card"><div class="ic">🧴➜♻️</div><h3>Plastic</h3><p>bottles, packaging</p></div>
+    <div class="card"><div class="ic">📱➜⚡</div><h3>E-waste</h3><p>phones, electronics</p></div>
+  </div>
+  <div class="callout"><p><b>On-device</b> = free to scale, privacy-preserving, and works <b>offline</b> — built for Kampala's connectivity.</p></div>
+  <span class="brand">EcoCycle</span><span class="num">5</span>
+</section>
+
+<!-- 6 SDG -->
+<section class="slide">
+  <div class="kicker">Impact</div>
+  <h2>Built around three UN SDGs</h2>
+  <div class="grid three">
+    <div class="card"><div class="ic">🏙️</div><h3>SDG 11.6</h3><p>Reduce cities' environmental impact via better municipal waste management.</p></div>
+    <div class="card"><div class="ic">♻️</div><h3>SDG 12.5</h3><p>Cut waste through recycling &amp; reuse — driven by AI sorting + rewards.</p></div>
+    <div class="card"><div class="ic">🌍</div><h3>SDG 13.3</h3><p>Climate action: divert organics to cut landfill methane; build climate literacy.</p></div>
+  </div>
+  <span class="brand">EcoCycle</span><span class="num">6</span>
+</section>
+
+<!-- 7 ARCHITECTURE -->
+<section class="slide dark">
+  <div class="kicker" style="color:#7be3a3">Under the Hood</div>
+  <h2>A real full-stack app — not a mockup</h2>
+  <div class="arch">  PWA  (installable · offline · on-device AI)
+        │  HTTPS + JWT
+   Node + Express  ──  REST API (reports, jobs, rewards, pay…)
+        │                         │
+   SQLite database         Integrations  (SMS · Email ·
+   (users, reports,         Flutterwave pay · Google)
+    points, jobs)           live ↔ sandbox via .env</div>
+  <p style="margin-top:26px;font-size:22px;color:#9fd9b4">JWT + bcrypt auth · OTP · Google Sign-In · Leaflet maps · Chart.js · Service-worker offline</p>
+  <span class="brand" style="color:#5e7a6c">EcoCycle</span><span class="num" style="color:#5e7a6c">7</span>
+</section>
+
+<!-- 8 COMPETITIVE -->
+<section class="slide">
+  <div class="kicker">Why We Win</div>
+  <h2>Others solve pieces. We close the loop.</h2>
+  <table>
+    <tr><th>Capability</th><th>Yo-Waste</th><th>Homeklin</th><th>T-Bin</th><th>EcoCycle</th></tr>
+    <tr><td>On-demand pickup + pay</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td><td class="y">✓</td></tr>
+    <tr><td>Citizen dump reporting</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+    <tr><td>On-device AI sorting</td><td class="n">—</td><td class="n">—</td><td class="n">~</td><td class="y">✓</td></tr>
+    <tr><td>Gamified rewards</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+    <tr><td>City SDG dashboard</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+    <tr><td>Unified 3-role ecosystem</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+  </table>
+  <span class="brand">EcoCycle</span><span class="num">8</span>
+</section>
+
+<!-- 9 CLOSE -->
+<section class="slide center hero">
+  <div class="kicker">From Crisis to Circular</div>
+  <h1>Smart Waste, Clean Cities</h1>
+  <p class="lead" style="color:#eafff1;max-width:840px">A working platform, ready to deploy — turning every citizen's phone into part of the solution.</p>
+  <div style="margin-top:30px;font-size:22px;color:#dff7e7">
+    <p>🔗 github.com/webdev123-tech/ecocycle</p>
+    <p style="margin-top:8px">Demo: amina.n@gmail.com · j.okello@ecocycle.ug · s.mbabazi@ecocycle.ug &nbsp;(pw: ecocycle)</p>
+  </div>
+  <span class="brand">Arnold Kigozi</span><span class="num">Thank you</span>
+</section>
+
+</body>
+</html>
