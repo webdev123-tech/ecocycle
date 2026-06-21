@@ -3,9 +3,15 @@
    =========================================================================== */
 const TOKEN_KEY = 'ecocycle:token';
 
-// Same-origin when served by the Node server (:4000); otherwise reach it directly.
-export const API_ORIGIN = (location.port === '4000' || location.protocol === 'file:')
-  ? '' : `${location.protocol}//${location.hostname}:4000`;
+// The Node server serves BOTH the PWA and /api on ONE origin — locally on :4000,
+// or wherever it's deployed (e.g. Render over HTTPS on the default port). So the
+// correct default is SAME-ORIGIN (''). Only build an absolute http://host:4000
+// when the static files are opened from a different dev port (e.g. Live Server
+// on :5500) or straight off the filesystem (file://).
+export const API_ORIGIN =
+  (location.protocol === 'file:')               ? 'http://localhost:4000'
+  : (location.port && location.port !== '4000') ? `${location.protocol}//${location.hostname}:4000`
+  :                                               '';
 const BASE = API_ORIGIN + '/api';
 
 export const getToken = () => localStorage.getItem(TOKEN_KEY);

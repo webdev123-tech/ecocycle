@@ -1,5 +1,5 @@
 /* EcoCycle service worker — offline-first app shell */
-const CACHE = 'ecocycle-v4';
+const CACHE = 'ecocycle-v5';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest',
   './css/styles.css',
