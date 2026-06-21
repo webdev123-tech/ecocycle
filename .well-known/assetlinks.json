@@ -1,1 +1,8 @@
-[]
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "ug.ecocycle.app",
+    "sha256_cert_fingerprints": ["4F:6A:D3:CD:D5:D1:24:98:CD:A3:36:15:C7:AC:C6:CE:5C:A9:B4:3C:28:70:B2:AD:4B:26:EA:04:57:D2:9F:1C"]
+  }
+}]
